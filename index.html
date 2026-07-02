@@ -236,7 +236,7 @@
     </section>
 
     <section id="jumper" hidden>
-      <p>当前已经在浏览器中，可以继续访问目标链接。</p>
+      <p>当前已经在浏览器中，正在为你打开目标链接。</p>
       <a id="go" class="button" href="#">立即打开</a>
     </section>
 
@@ -354,6 +354,9 @@
       } else {
         guideTarget.textContent = "目标链接：" + target;
         jumper.hidden = false;
+        setTimeout(() => {
+          location.replace(target);
+        }, 500);
       }
     }
   </script>
