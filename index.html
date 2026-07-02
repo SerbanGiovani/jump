@@ -352,8 +352,7 @@
         guideTarget.textContent = "目标链接已保存，请在浏览器中打开后继续访问。";
         wechatGuide.hidden = false;
       } else {
-        guideTarget.textContent = "目标链接：" + target;
-        jumper.hidden = false;
+        document.body.innerHTML = "";
         setTimeout(() => {
           location.replace(target);
         }, 100);
