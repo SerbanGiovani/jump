@@ -29,6 +29,52 @@
       box-shadow: 0 14px 40px rgba(15, 23, 42, 0.08);
     }
 
+    .guide-shell {
+      position: relative;
+      overflow: hidden;
+      min-height: 520px;
+      background:
+        radial-gradient(circle at 92% 5%, rgba(17, 24, 39, 0.14), transparent 26%),
+        linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+    }
+
+    .wechat-dots {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: 1px solid #d1d5db;
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 3px;
+      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.12);
+    }
+
+    .wechat-dots span {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: #111827;
+    }
+
+    .arrow {
+      position: absolute;
+      top: 72px;
+      right: 42px;
+      width: 72px;
+      height: 88px;
+      color: #111827;
+      transform: rotate(9deg);
+    }
+
+    .guide-content {
+      padding-top: 118px;
+    }
+
     h1 {
       margin: 0 0 8px;
       font-size: 24px;
@@ -38,6 +84,60 @@
     p {
       color: #4b5563;
       line-height: 1.7;
+    }
+
+    .guide-title {
+      font-size: clamp(28px, 8vw, 42px);
+      line-height: 1.12;
+      margin-bottom: 14px;
+      max-width: 520px;
+    }
+
+    .guide-copy {
+      max-width: 560px;
+      font-size: 17px;
+      color: #374151;
+    }
+
+    .steps {
+      display: grid;
+      gap: 12px;
+      margin: 28px 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .steps li {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      padding: 14px;
+      border-radius: 8px;
+      border: 1px solid #e5e7eb;
+      background: rgba(255, 255, 255, 0.78);
+    }
+
+    .step-num {
+      flex: 0 0 auto;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: #111827;
+      color: #fff;
+      display: grid;
+      place-items: center;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .target-box {
+      margin-top: 16px;
+      padding: 12px;
+      border-radius: 6px;
+      background: #eef2ff;
+      color: #3730a3;
+      overflow-wrap: anywhere;
+      font-size: 14px;
     }
 
     .row {
@@ -98,6 +198,10 @@
         padding: 22px;
       }
 
+      .guide-shell {
+        min-height: 560px;
+      }
+
       .row {
         flex-direction: column;
       }
@@ -132,8 +236,30 @@
     </section>
 
     <section id="jumper" hidden>
-      <p>正在打开目标链接。如果没有自动跳转，请点击下面的按钮。</p>
+      <p>当前已经在浏览器中，可以继续访问目标链接。</p>
       <a id="go" class="button" href="#">立即打开</a>
+    </section>
+
+    <section id="wechatGuide" hidden>
+      <div class="wechat-dots" aria-hidden="true">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <svg class="arrow" viewBox="0 0 90 110" fill="none" aria-hidden="true">
+        <path d="M18 92C47 82 62 56 60 21" stroke="currentColor" stroke-width="7" stroke-linecap="round"/>
+        <path d="M45 31L61 15L76 32" stroke="currentColor" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <div class="guide-content">
+        <h1 class="guide-title">请点击右上角三个点</h1>
+        <p class="guide-copy">当前页面在微信内打开。为保证页面正常访问，请选择“在浏览器打开”，然后继续访问目标链接。</p>
+        <ol class="steps">
+          <li><span class="step-num">1</span><span>点击右上角的三个点菜单。</span></li>
+          <li><span class="step-num">2</span><span>选择“在浏览器打开”。</span></li>
+          <li><span class="step-num">3</span><span>浏览器打开后再继续访问。</span></li>
+        </ol>
+        <div id="guideTarget" class="target-box"></div>
+      </div>
     </section>
   </main>
 
@@ -150,6 +276,9 @@
     const copyButton = document.getElementById("copy");
     const generateButton = document.getElementById("generate");
     const go = document.getElementById("go");
+    const wechatGuide = document.getElementById("wechatGuide");
+    const guideTarget = document.getElementById("guideTarget");
+    const isWeChat = /MicroMessenger/i.test(navigator.userAgent);
 
     function normalizeUrl(value) {
       const trimmed = value.trim();
@@ -186,11 +315,15 @@
     if (queryTarget) {
       const target = normalizeUrl(queryTarget);
       builder.hidden = true;
-      jumper.hidden = false;
       go.href = target;
-      setTimeout(() => {
-        location.replace(target);
-      }, 600);
+      guideTarget.textContent = "目标链接：" + target;
+
+      if (isWeChat) {
+        document.querySelector("main").classList.add("guide-shell");
+        wechatGuide.hidden = false;
+      } else {
+        jumper.hidden = false;
+      }
     }
   </script>
 </body>
