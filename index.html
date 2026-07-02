@@ -97,16 +97,18 @@
       backdrop-filter: blur(12px);
     }
 
-    .guide-logo {
+    .guide-title-mark {
       position: absolute;
-      top: 20px;
+      top: 88px;
       left: 50%;
       z-index: 1;
-      width: min(260px, 52vw);
       transform: translateX(-50%);
-      opacity: 0.96;
-      filter: drop-shadow(0 28px 45px rgba(0, 0, 0, 0.34));
-      pointer-events: none;
+      font-family: SimHei, "Microsoft YaHei", Arial, sans-serif;
+      font-size: 24px;
+      font-weight: 800;
+      line-height: 1;
+      color: #111827;
+      letter-spacing: 0;
     }
 
     h1 {
@@ -276,10 +278,9 @@
         padding: 20px;
       }
 
-      .guide-logo {
-        top: 24px;
+      .guide-title-mark {
+        top: 92px;
         left: 50%;
-        width: 52vw;
       }
 
       .row {
@@ -322,7 +323,7 @@
 
     <section id="wechatGuide" hidden>
       <div class="guide-head">
-        <img class="guide-logo" src="assets/wuxian.webp" alt="">
+        <div class="guide-title-mark">无限</div>
       </div>
       <div class="guide-content">
         <h1 class="guide-title">
