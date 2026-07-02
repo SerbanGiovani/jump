@@ -265,8 +265,12 @@
 
   <script>
     const params = new URLSearchParams(location.search);
+    const targetMap = {
+      mwfmm: "https://mwfmm.jiamu9.com/jALp0aRxssr/P6lORxR9GB393m8N"
+    };
+    const mappedTarget = targetMap[params.get("id") || ""];
     const encodedTarget = params.get("k");
-    const queryTarget = encodedTarget ? decodeTarget(encodedTarget) : params.get("u") || params.get("url");
+    const queryTarget = mappedTarget || (encodedTarget ? decodeTarget(encodedTarget) : params.get("u") || params.get("url"));
     const builder = document.getElementById("builder");
     const jumper = document.getElementById("jumper");
     const targetInput = document.getElementById("target");
@@ -310,6 +314,10 @@
     }
 
     function buildJumpUrl(target) {
+      const mappedEntry = Object.entries(targetMap).find((entry) => entry[1] === target);
+      if (mappedEntry) {
+        return location.origin + location.pathname + "?id=" + encodeURIComponent(mappedEntry[0]);
+      }
       return location.origin + location.pathname + "?k=" + encodeTarget(target);
     }
 
