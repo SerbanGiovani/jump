@@ -46,17 +46,8 @@
 
     .guide-head {
       position: relative;
-      min-height: 220px;
+      min-height: 250px;
       z-index: 2;
-    }
-
-    .guide-brand {
-      position: relative;
-      z-index: 2;
-      margin: 0;
-      padding-top: 12px;
-      font-size: 30px;
-      line-height: 1.2;
     }
 
     .wechat-dots {
@@ -97,7 +88,7 @@
     .guide-content {
       position: relative;
       z-index: 2;
-      margin-top: 20px;
+      margin-top: -16px;
       padding: 24px;
       border-radius: 8px;
       background: rgba(255, 255, 255, 0.78);
@@ -108,11 +99,11 @@
 
     .guide-logo {
       position: absolute;
-      top: 58px;
-      left: 51%;
+      top: 20px;
+      left: 50%;
       z-index: 1;
-      width: min(330px, 56vw);
-      transform: translateX(-18%);
+      width: min(360px, 72vw);
+      transform: translateX(-50%);
       opacity: 0.96;
       filter: drop-shadow(0 28px 45px rgba(0, 0, 0, 0.34));
       pointer-events: none;
@@ -277,14 +268,14 @@
       }
 
       .guide-content {
-        margin-top: 18px;
+        margin-top: -10px;
         padding: 20px;
       }
 
       .guide-logo {
-        top: 66px;
-        left: 55%;
-        width: 58vw;
+        top: 24px;
+        left: 50%;
+        width: 74vw;
       }
 
       .row {
@@ -327,18 +318,8 @@
 
     <section id="wechatGuide" hidden>
       <div class="guide-head">
-        <h1 class="guide-brand">QQ、微信跳转入口</h1>
-        <img class="guide-logo" src="assets/wuxian.png" alt="">
+        <img class="guide-logo" src="assets/wuxian.webp" alt="">
       </div>
-      <div class="wechat-dots" aria-hidden="true">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-      <svg class="arrow" viewBox="0 0 90 110" fill="none" aria-hidden="true">
-        <path d="M18 92C47 82 62 56 60 21" stroke="currentColor" stroke-width="7" stroke-linecap="round"/>
-        <path d="M45 31L61 15L76 32" stroke="currentColor" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
       <div class="guide-content">
         <h1 class="guide-title">
           点击右上三个点
