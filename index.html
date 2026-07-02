@@ -140,6 +140,37 @@
       font-size: 14px;
     }
 
+    .inline-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 34px;
+      height: 34px;
+      margin: 0 4px;
+      border-radius: 50%;
+      background: #fff;
+      border: 1px solid #e5e7eb;
+      vertical-align: middle;
+      box-shadow: 0 8px 18px rgba(15, 23, 42, 0.1);
+    }
+
+    .inline-icon.dots {
+      gap: 2px;
+    }
+
+    .inline-icon.dots span {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: #111827;
+    }
+
+    .inline-icon.browser svg {
+      width: 19px;
+      height: 19px;
+      stroke: #111827;
+    }
+
     .row {
       display: flex;
       gap: 10px;
@@ -251,11 +282,26 @@
         <path d="M45 31L61 15L76 32" stroke="currentColor" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
       <div class="guide-content">
-        <h1 class="guide-title">请点击右上角三个点</h1>
-        <p class="guide-copy">当前页面在微信内打开。为保证页面正常访问，请选择“在浏览器打开”，然后继续访问目标链接。</p>
+        <h1 class="guide-title">
+          点击右上三个点
+          <span class="inline-icon dots" aria-label="三个点菜单">
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
+          选择在浏览器
+          <span class="inline-icon browser" aria-label="浏览器">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <circle cx="12" cy="12" r="9" stroke-width="2"/>
+              <path d="M3 12h18M12 3c2.4 2.5 3.7 5.5 3.7 9S14.4 18.5 12 21M12 3C9.6 5.5 8.3 8.5 8.3 12S9.6 18.5 12 21" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </span>
+          打开
+        </h1>
+        <p class="guide-copy">当前页面在微信内打开。为保证页面正常访问，请按提示用浏览器打开。</p>
         <ol class="steps">
-          <li><span class="step-num">1</span><span>点击右上角的三个点菜单。</span></li>
-          <li><span class="step-num">2</span><span>选择“在浏览器打开”。</span></li>
+          <li><span class="step-num">1</span><span>点击右上三个点 <span class="inline-icon dots" aria-label="三个点菜单"><span></span><span></span><span></span></span></span></li>
+          <li><span class="step-num">2</span><span>选择在浏览器 <span class="inline-icon browser" aria-label="浏览器"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke-width="2"/><path d="M3 12h18M12 3c2.4 2.5 3.7 5.5 3.7 9S14.4 18.5 12 21M12 3C9.6 5.5 8.3 8.5 8.3 12S9.6 18.5 12 21" stroke-width="2" stroke-linecap="round"/></svg></span> 打开</span></li>
           <li><span class="step-num">3</span><span>浏览器打开后再继续访问。</span></li>
         </ol>
         <div id="guideTarget" class="target-box"></div>
