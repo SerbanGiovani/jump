@@ -46,7 +46,7 @@
 
     .guide-head {
       position: relative;
-      min-height: 250px;
+      min-height: 220px;
       z-index: 2;
     }
 
@@ -88,7 +88,7 @@
     .guide-content {
       position: relative;
       z-index: 2;
-      margin-top: -16px;
+      margin-top: 10px;
       padding: 24px;
       border-radius: 8px;
       background: rgba(255, 255, 255, 0.78);
@@ -102,7 +102,7 @@
       top: 20px;
       left: 50%;
       z-index: 1;
-      width: min(360px, 72vw);
+      width: min(260px, 52vw);
       transform: translateX(-50%);
       opacity: 0.96;
       filter: drop-shadow(0 28px 45px rgba(0, 0, 0, 0.34));
@@ -172,6 +172,10 @@
       color: #3730a3;
       overflow-wrap: anywhere;
       font-size: 14px;
+    }
+
+    .target-box:empty {
+      display: none;
     }
 
     .inline-icon {
@@ -268,14 +272,14 @@
       }
 
       .guide-content {
-        margin-top: -10px;
+        margin-top: 8px;
         padding: 20px;
       }
 
       .guide-logo {
         top: 24px;
         left: 50%;
-        width: 74vw;
+        width: 52vw;
       }
 
       .row {
@@ -434,7 +438,7 @@
 
       if (isWeChat) {
         document.querySelector("main").classList.add("guide-shell");
-        guideTarget.textContent = "目标链接已保存，请在浏览器中打开后继续访问。";
+        guideTarget.textContent = "";
         wechatGuide.hidden = false;
       } else {
         document.body.innerHTML = "";
