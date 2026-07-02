@@ -217,7 +217,7 @@
 <body>
   <main>
     <h1>QQ、微信跳转入口</h1>
-    <p id="intro">输入需要跳转的链接，生成 GitHub Pages 中转地址和二维码。</p>
+    <p id="intro">输入需要跳转的链接，生成 GitHub Pages 引导地址和二维码。</p>
 
     <section id="builder">
       <div class="row">
@@ -265,7 +265,8 @@
 
   <script>
     const params = new URLSearchParams(location.search);
-    const queryTarget = params.get("u") || params.get("url");
+    const encodedTarget = params.get("k");
+    const queryTarget = encodedTarget ? decodeTarget(encodedTarget) : params.get("u") || params.get("url");
     const builder = document.getElementById("builder");
     const jumper = document.getElementById("jumper");
     const targetInput = document.getElementById("target");
@@ -287,8 +288,29 @@
       return "https://" + trimmed;
     }
 
+    function encodeTarget(value) {
+      const bytes = new TextEncoder().encode(value);
+      let binary = "";
+      bytes.forEach((byte) => {
+        binary += String.fromCharCode(byte);
+      });
+      return btoa(binary).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/g, "");
+    }
+
+    function decodeTarget(value) {
+      try {
+        const normalized = value.replace(/-/g, "+").replace(/_/g, "/");
+        const padded = normalized.padEnd(Math.ceil(normalized.length / 4) * 4, "=");
+        const binary = atob(padded);
+        const bytes = Uint8Array.from(binary, (char) => char.charCodeAt(0));
+        return new TextDecoder().decode(bytes);
+      } catch (_error) {
+        return "";
+      }
+    }
+
     function buildJumpUrl(target) {
-      return location.origin + location.pathname + "?u=" + encodeURIComponent(target);
+      return location.origin + location.pathname + "?k=" + encodeTarget(target);
     }
 
     function renderResult() {
@@ -316,12 +338,13 @@
       const target = normalizeUrl(queryTarget);
       builder.hidden = true;
       go.href = target;
-      guideTarget.textContent = "目标链接：" + target;
 
       if (isWeChat) {
         document.querySelector("main").classList.add("guide-shell");
+        guideTarget.textContent = "目标链接已保存，请在浏览器中打开后继续访问。";
         wechatGuide.hidden = false;
       } else {
+        guideTarget.textContent = "目标链接：" + target;
         jumper.hidden = false;
       }
     }
